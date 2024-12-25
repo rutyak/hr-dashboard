@@ -1,0 +1,89 @@
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 18px 0px;
+}
+
+.dropdown-container,
+.input-btn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dropdown select {
+  padding: 7px 24px;
+  border: 1px solid #a770ef;
+  border-radius: 25px;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  background-color: white;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  border: 2px solid #a770ef;
+  border-radius: 25px;
+  overflow: hidden;
+  max-width: 300px;
+  padding-left: 16px;
+}
+
+.search-input input {
+  padding: 7px 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-input button {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: #a770ef;
+  font-size: 16px;
+}
+
+/* Add button styling */
+.add-button {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-button:hover {
+  background: linear-gradient(90deg, #2575fc, #6a11cb);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-bar-container {
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+
+  .add-button {
+    width: 100%;
+    text-align: center;
+  }
+}

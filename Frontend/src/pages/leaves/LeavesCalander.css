@@ -1,0 +1,137 @@
+
+  .leave-calendar {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .calendar-header {
+    background: linear-gradient(135deg, #783FED, #442487);
+    color: white;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .calendar-header h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .date-switcher {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .today-btn {
+    background: white;
+    border: none;
+    color: #8e24aa;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .date-picker {
+    display: flex;
+    align-items: center;
+    background: #8e24aa;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  
+  .calendar-icon {
+    background: transparent;
+    border: none;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  
+  .calendar-icon img {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Leave List */
+  .leave-list {
+    padding: 16px;
+  }
+  
+  .leave-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .leave-item:last-child {
+    border-bottom: none;
+  }
+  
+  .profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  
+  .leave-details {
+    flex: 1;
+  }
+  
+  .leave-details .name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .leave-details .designation {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .leave-dates {
+    text-align: right;
+    font-size: 12px;
+    color: #555;
+  }
+  
+  .leave-dates span {
+    display: block;
+  }
+  
+  @media (max-width: 480px) {
+    .calendar-header {
+      padding: 12px;
+    }
+  
+    .date-switcher {
+      flex-direction: column;
+      gap: 8px;
+    }
+  
+    .today-btn,
+    .date-picker {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .leave-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .leave-dates {
+      margin-top: 8px;
+    }
+  }
+  
