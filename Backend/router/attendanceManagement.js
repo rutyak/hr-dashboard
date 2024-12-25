@@ -12,7 +12,7 @@ router.post("/create/attendance",upload.single("photo"), createController(attend
 
 router.get("/fetch/attendance", fetchController(attendance));
 
-router.put("/update/attendance/:id", updateController(attendance));
+router.patch("/update/attendance/:id", updateController(attendance));
 
 router.delete("/delete/attendance/:id", deleteController(attendance));
 

@@ -1,90 +1,68 @@
-const cloudinary = require('../storage/Cloudinary');
+const cloudinary = require("../storage/Cloudinary");
 
 const createController = (model) => {
   return async (req, res) => {
     const {
       name,
-      photo,
-      id,
-      gender,
-      dob,
-      contact,
-      fees,
-      salary,
-      className,
-      classlimit,
-      year,
-      teacher,
-      assignedClass,
-      address,
-      father,
-      attendance,
-      classconducted
+      email,
+      phone,
+      department,
+      experience,
+      resume,
+      declaration,
+      joiningDate,
+      position,
     } = req.body;
 
+    console.log(department, email, joiningDate, name, phone, position);
+    console.log(model.modelName);
+
+    // Function to format date to dd/mm/yyyy
+    const formatDate = (date) => {
+      if (!date) return null; // Handle undefined or null dates
+      const d = new Date(date);
+      const day = String(d.getDate()).padStart(2, "0");
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const year = d.getFullYear();
+      return `${day}/${month}/${year}`;
+    };
+
     try {
-
-      // let imageFile;
-
-
-      // if (req.file) {
-      //   // Upload the image to Cloudinary
-      //   const result = await cloudinary.uploader.upload_stream(
-      //     { resource_type: 'auto', folder: 'Images' },
-      //     (error, result) => {
-      //       if (error) {
-      //         return res.status(500).json({ message: "Cloudinary error", error });
-      //       }
-      //       imageFile = result.url; // URL of uploaded image
-      //     }
-      //   ).end(req.file.buffer); // Send the file buffer to Cloudinary
-      // } else {
-      //   return res.status(400).json({ message: "No file uploaded" });
-      // }
-
-      // Format date of birth if provided
-      let formattedDob = dob ? new Date(dob).toLocaleDateString("en-GB") : undefined;
-
       let newData;
-
       switch (model.modelName) {
-        case "Student":
+        case "Candidate":
+          console.log("Candidate clicked !!");
+          const result = await cloudinary.uploader.upload(req.file.path, {
+            resource_type: "auto",
+            folder: "files",
+          });
+
           newData = await model.create({
-            photo,
             name,
-            id,
-            gender,
-            dob: formattedDob,
-            contact,
-            fees,
-            className,
-            address,
-            father,
-            attendance
+            email,
+            phone,
+            department,
+            experience,
+            resume: result.url,
+            declaration,
           });
           break;
-        case "Teacher":
+        case "Employee":
+          console.log("Employee in backend working as expected::");
           newData = await model.create({
-            photo,
+            department,
+            email,
+            joiningDate: formatDate(joiningDate), // Format the joiningDate field
             name,
-            id,
-            gender,
-            dob: formattedDob,
-            contact,
-            salary,
-            assignedClass,
-            address,
-            father,
-            classconducted
+            phone,
+            position,
           });
           break;
-        case "Class":
-          newData = await model.create({
-            className,
-            teacher,
-            classlimit,
-            year,
-          });
+        case "Attendance":
+          newData = await model.create({});
+          break;
+        case "Leave":
+          newData = await model.create({});
           break;
         default:
           return res.status(400).json({ message: "Invalid model type" });

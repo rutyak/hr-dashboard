@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Table.css";
+import FormPopover from "../form/FormPopover";
 
-const Table = ({ data, columns, rowKey }) => {
+const Table = ({ data, columns, rowKey, fields, onSubmit, onDelete }) => {
+  const [activeRowIndex, setActiveRowIndex] = useState(null);
+  const [selectedItemData, setSelectedItemData] = useState(null);
+
+  function handleToggle(rowIndex, itemData) {
+    setSelectedItemData(itemData);  
+    console.log("rowIndex: ", rowIndex);
+
+    if (activeRowIndex === rowIndex) {
+      setActiveRowIndex(null);
+    } else {
+      setActiveRowIndex(rowIndex);
+    }
+  }
+
   return (
     <div className="reusable-table-container">
       <table>
@@ -20,6 +35,32 @@ const Table = ({ data, columns, rowKey }) => {
                   {column.render
                     ? column.render(item[column.accessor], item)
                     : item[column.accessor]}
+                  {column.header === "" && (
+                    <div className="action-menu">
+                      <div
+                        className="action-dot"
+                        onClick={() => handleToggle(rowIndex, item)}
+                      >
+                        ⋮
+                      </div>
+                      <div
+                        className={`action-dropdown ${
+                          activeRowIndex === rowIndex ? "visible" : ""
+                        }`}
+                      >
+                        <FormPopover
+                          btnTitle={"Edit Employee Details"}
+                          fields={fields}
+                          onSubmit={onSubmit}
+                          itemId={item._id}
+                          itemData={selectedItemData} 
+                        />
+                        <button className="delete-btn" onClick={() => onDelete(item._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </td>
               ))}
             </tr>

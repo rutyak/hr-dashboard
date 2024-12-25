@@ -27,20 +27,20 @@ const Sidebar = ({setTitle}) => {
       </div>
       <div className="menu">
         <p className="section-title">Recruitment</p>
-        <Link to="/main" className="menu-item" onClick={()=> setTitle("Candidates")}>
+        <Link to="/dashboard" className="menu-item" onClick={()=> setTitle("Candidates")}>
           <CandidateIcon />
           <span className="text">Candidates</span>
         </Link>
         <p className="section-title">Organization</p>
-        <Link to="/main/employees" className="menu-item" onClick={()=> setTitle("Employees")}>
+        <Link to="/dashboard/employees" className="menu-item" onClick={()=> setTitle("Employees")}>
           <EmployeeIcon />
           <span className="text">Employees</span>
         </Link>
-        <Link to="/main/attendance" className="menu-item" onClick={()=> setTitle("Attendance")}>
+        <Link to="/dashboard/attendance" className="menu-item" onClick={()=> setTitle("Attendance")}>
           <AttendanceIcon />
           <span className="text">Attendance</span>
         </Link>
-        <Link to="/main/leaves" className="menu-item" onClick={()=> setTitle("Leaves")}>
+        <Link to="/dashboard/leaves" className="menu-item" onClick={()=> setTitle("Leaves")}>
           <LeavesIcon />
           <span className="text">Leaves</span>
         </Link>

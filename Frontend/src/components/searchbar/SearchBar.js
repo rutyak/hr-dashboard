@@ -3,7 +3,7 @@ import "./SearchBar.css";
 import FormPopover from "../form/FormPopover";
 import { SearchIcon } from "../../assets/Icons";
 
-const SearchBar = () => {
+const SearchBar = ({btnTitle, fields, onSubmit}) => {
   return (
     <div className="search-bar-container">
       <div className="dropdown-container">
@@ -28,7 +28,7 @@ const SearchBar = () => {
           <input type="text" placeholder="Search" />
         </div>
         <div>
-          <FormPopover />
+          <FormPopover btnTitle={btnTitle} fields={fields} onSubmit={onSubmit}/>
         </div>
       </div>
     </div>

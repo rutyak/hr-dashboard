@@ -1,66 +1,50 @@
 import React from "react";
-import ReusableTable from "../../components/table/Table";
-import SearchBar from "../../components/searchbar/SearchBar";
+import RecordTable from "../../components/records/RecordTable";
 
 const Employees = () => {
-  const employees = [
-    {
-      profile: "https://via.placeholder.com/40",
-      name: "Darlene Robertson",
-      email: "michael.mitc@example.com",
-      phone: "(603) 555-0123",
-      position: "Team Lead",
-      department: "Backend Development",
-      joiningDate: "10/06/13",
+  const fields = [
+    { name: "name", type: "text", placeholder: "Full Name", required: true },
+    { name: "email", type: "email", placeholder: "Email Address", required: true },
+    { name: "phone", type: "tel", placeholder: "Phone Number", required: true },
+    { 
+      name: "position", 
+      type: "select", 
+      placeholder: "Select Position", 
+      required: true, 
+      options: [
+        { value: "Intern", label: "Intern" },
+        { value: "Designer", label: "Designer" },
+        { value: "Developer", label: "Developer" },
+        { value: "Manager", label: "Manager" }
+      ] 
     },
-    {
-      profile: "https://via.placeholder.com/40",
-      name: "Leslie Alexander",
-      email: "felicia.reid@example.com",
-      phone: "(229) 555-0109",
-      position: "Intern",
-      department: "Designer",
-      joiningDate: "08/15/17",
-    },
+    { name: "department", type: "text", placeholder: "Department", required: true },
+    { name: "joiningDate", type: "date", placeholder: "Joining Date", required: true }
   ];
 
   const columns = [
-    {
-      header: "",
-      accessor: "",
-      render: () => <input type="checkbox" />,
-    },
-    {
-      header: "Profile",
-      accessor: "profile",
-      render: (value) => <img src={value} alt="Profile" className="profile-pic" />,
-    },
+    { render: () => <input type="checkbox" /> },
+    { header: "Profile", accessor: "profile", render: (value) => <img src={value} alt="Profile" className="profile-pic" /> },
     { header: "Employee Name", accessor: "name" },
     { header: "Email Address", accessor: "email" },
     { header: "Phone Number", accessor: "phone" },
     { header: "Position", accessor: "position" },
     { header: "Department", accessor: "department" },
     { header: "Date of Joining", accessor: "joiningDate" },
-    {
-      header: "",
-      accessor: "",
-      render: () => (
-        <div className="action-menu">
-          <button className="action-dots">⋮</button>
-          {/* <div className="action-dropdown">
-            <button>Edit</button>
-            <button>Delete</button>
-          </div> */}
-        </div>
-      ),
-    },
+    { header: "", accessor: "" }
   ];
 
   return (
-    <div style={{ margin: "0px 35px" }}>
-      <SearchBar />
-      <ReusableTable data={employees} columns={columns} rowKey="email" />
-    </div>
+    <RecordTable
+      fetchUrl={`${process.env.REACT_APP_BACKEND_URL}/fetch/employee`}
+      createUrl={`${process.env.REACT_APP_BACKEND_URL}/create/employee`}
+      updateUrl={`${process.env.REACT_APP_BACKEND_URL}/update/employee`}
+      deleteUrl={`${process.env.REACT_APP_BACKEND_URL}/delete/employee`}
+      fields={fields}
+      columns={columns}
+      btnTitle="Add New Employee"
+      rowKey="email"
+    />
   );
 };
 

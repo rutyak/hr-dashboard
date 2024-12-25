@@ -85,10 +85,53 @@ const Leaves = () => {
     },
   ];
 
+  const fields = [
+    {
+      name: "fullName",
+      type: "text",
+      placeholder: "Full Name",
+      required: true,
+    },
+    {
+      name: "designation",
+      type: "select",
+      placeholder: "Select Designation",
+      required: true,
+      options: [
+        { value: "Team Lead", label: "Team Lead" },
+        { value: "Developer", label: "Developer" },
+        { value: "Manager", label: "Manager" },
+        { value: "Intern", label: "Intern" },
+      ],
+    },
+    {
+      name: "leaveDate",
+      type: "date",
+      placeholder: "Leave Date",
+      required: true,
+    },
+    {
+      name: "reason",
+      type: "textarea",
+      placeholder: "Reason for Leave",
+      required: true,
+    },
+    {
+      name: "attachment",
+      type: "file",
+      placeholder: "Attach Supporting Documents",
+      required: false,
+    },
+  ];
+  
+  function handleSubmit(){
+    console.log("Leaves applied....")
+  }
+
   return (
     <>
       <div style={{ margin: "0px 35px" }}>
-        <SearchBar />
+        <SearchBar btnTitle={"Add New Leave"} fields={fields} onSubmit={handleSubmit}/>
         <div className="leaves">
           <div style={{ width: "70%" }}>
             <ReusableTable data={data} columns={columns} rowKey="name" />

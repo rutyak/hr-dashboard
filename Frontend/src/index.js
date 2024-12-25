@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Welcome from "./pages/Welcome";
-import "./index.css";
+import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import StudentManagement from "./pages/student/StudentManagement";
-// import TeacherManagement from "./pages/teacher/TeacherManagement";
-// import ClassManagement from "./pages/class/ClassManagement";
-// import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Welcome from "./pages/Welcome";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import Main from "./pages/Main";
@@ -15,58 +11,56 @@ import Candidates from "./pages/candidates/Candidates";
 import Employees from "./pages/employees/Employees";
 import Attendance from "./pages/attendance/Attendance";
 import Leaves from "./pages/leaves/Leaves";
-// import Analytics from "./pages/analytics/Analytics";
-// import Welcome from "./pages/Welcome";
-// import SignUp from "./pages/authentication/SignUp";
-// import Login from "./pages/authentication/Login";
-// import Main from "./pages/Main";
-// import ForgetPassword from "./pages/authentication/ForgetPassword";
+import store from "./store";
+import "./index.css";
 
+// Define the router
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Welcome/>,
+    element: <Welcome />, // This should be the root element for this path
     children: [
       {
         path: "",
-        element: <Login/>,
+        element: <Login />, // Login form route
       },
       {
         path: "register",
-        element: <Register/>,
+        element: <Register />, // Registration form route
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <Main/>,
+    element: <Main />, // Main dashboard component
     children: [
       {
         path: "",
-        element: <Candidates />,
+        element: <Candidates />, // Candidates list route
       },
       {
         path: "employees",
-        element: <Employees />,
+        element: <Employees />, // Employees list route
       },
       {
         path: "attendance",
-        element: <Attendance />,
+        element: <Attendance />, // Attendance management route
       },
       {
         path: "leaves",
-        element: <Leaves />,
+        element: <Leaves />, // Leaves management route
       },
     ],
   },
 ]);
 
+// Render the app
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ToastContainer />
-    <RouterProvider router={router}>
-        <Welcome/>
-    </RouterProvider>
+    <Provider store={store}>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

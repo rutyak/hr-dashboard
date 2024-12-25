@@ -58,7 +58,9 @@ const Attendance = () => {
     {
       header: "Profile",
       accessor: "profile",
-      render: (value) => <img src={value} alt="Profile" className="profile-pic" />,
+      render: (value) => (
+        <img src={value} alt="Profile" className="profile-pic" />
+      ),
     },
     { header: "Employee Name", accessor: "name" },
     { header: "Designation", accessor: "designation" },
@@ -68,10 +70,14 @@ const Attendance = () => {
   ];
 
   return (
-    <div style={{ margin: "0px 35px" }}>
-      <SearchBar />
-      <ReusableTable data={data} columns={columns} rowKey="name" />
-    </div>
+    <RecordTable
+      fetchUrl={`${process.env.REACT_APP_BACKEND_URL}/fetch/employee`}
+      updateUrl={`${process.env.REACT_APP_BACKEND_URL}/update/employee`}
+      deleteUrl={`${process.env.REACT_APP_BACKEND_URL}/delete/employee`}
+      fields={fields}
+      columns={columns}
+      rowKey="name"
+    />
   );
 };
 

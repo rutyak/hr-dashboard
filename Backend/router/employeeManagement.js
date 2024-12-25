@@ -12,7 +12,7 @@ router.post("/create/employee", createController(employee))
 
 router.get("/fetch/employee", fetchController(employee));
 
-router.put("/update/employee/:id", updateController(employee));
+router.patch("/update/employee/:id", updateController(employee));
 
 router.delete("/delete/employee/:id", deleteController(employee));
 
