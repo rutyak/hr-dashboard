@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext"; 
 const Base_url = process.env.REACT_APP_BACKEND_URL;
 
 const Login = () => {
@@ -10,21 +11,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { isAuthenticated, login } = useAuth(); 
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard"); 
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-  
+
     try {
       const response = await axios.post(`${Base_url}/login`, { email, password });
-  
+
       if (response && response.data) {
         toast.success("Login successfully !!");
-        const { token } = response.data; 
-        console.log("Login successful:", response.data);
-  
+        const { token } = response.data;
+
         localStorage.setItem("token", token);
-  
+        login();
         navigate("/dashboard");
       } else {
         setError("Invalid response from the server.");
@@ -38,7 +45,6 @@ const Login = () => {
       console.error("Error:", err);
     }
   };
-  
 
   return (
     <div className="register-card">

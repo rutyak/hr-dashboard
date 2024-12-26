@@ -30,7 +30,6 @@ const Register = () => {
 
     const { fullName, email, password, confirmPassword } = formData;
 
-    // Basic validation
     if (!fullName || !email || !password || !confirmPassword) {
       setError("All fields are required.");
       return;
@@ -42,7 +41,6 @@ const Register = () => {
     }
 
     try {
-      // Send POST request to the registration endpoint
       const response = await axios.post(`${Base_url}/register`, {
         fullName,
         email,
@@ -53,17 +51,14 @@ const Register = () => {
         toast.success("Registration successful!");
         console.log("Registration successful:", response.data);
 
-        // Redirect to the login page after a short delay
         setTimeout(() => navigate("/"), 2000);
       } else {
         setError("Registration failed. Please try again.");
       }
     } catch (err) {
-      // Handle errors from the API
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
       } else {
-        // Handle generic errors
         setError("An error occurred. Please try again later.");
       }
       console.error("Error:", err);

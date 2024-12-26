@@ -35,9 +35,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: end;
-  padding-top: 140px;
-  padding-right: 35px;
+  align-items: flex-start;
+  padding-right: 33px;
   z-index: 100;
+  padding-top: 141px;
 }
 
 .popover-content {
@@ -117,4 +118,71 @@
 
 .save-button:hover {
   background: #2575fc;
+}
+
+@media (max-width: 480px) {
+  .popover-overlay {
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px;
+    padding-right: 0px;
+  }
+
+  .status-dropdown {
+    font-size: smaller;
+  }
+  .edit-button {
+    padding-top: 7px;
+    font-size: larger;
+  }
+
+  .action-dropdown .delete-btn {
+    font-size: 10px;
+    font-size: larger;
+  }
+
+  .popover-content {
+    width: 94.5%;
+  }
+
+  .form-fields {
+    grid-template-columns: repeat(auto-fit, minmax(294px, 1fr));
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .popover-overlay {
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px;
+    padding-right: 0px;
+  }
+
+  .action-dropdown .delete-btn {
+    font-size: 10px;
+  }
+
+  .status-dropdown {
+    font-size: smaller;
+  }
+}
+
+@media (min-width: 1025px) {
+  th {
+    font-size: 14px;
+  }
+
+  td {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1281px) {
+  th {
+    font-size: 16px;
+  }
+
+  td {
+    font-size: 14px;
+  }
 }

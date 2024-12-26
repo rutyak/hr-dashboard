@@ -4,7 +4,7 @@ import "./FormPopover.css";
 const FormPopover = ({ btnTitle, fields, onSubmit, itemId, itemData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState(
-    fields.reduce(
+    fields?.reduce(
       (acc, field) => ({
         ...acc,
         [field.name]:

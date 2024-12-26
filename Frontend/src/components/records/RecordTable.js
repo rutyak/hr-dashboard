@@ -3,6 +3,7 @@ import axios from "axios";
 import ReusableTable from "../../components/table/Table";
 import SearchBar from "../../components/searchbar/SearchBar";
 import { toast } from "react-toastify";
+import "./RecordTable.css";
 
 const RecordTable = ({ 
   fetchUrl, 
@@ -66,7 +67,7 @@ const RecordTable = ({
   }, []);
 
   return (
-    <div style={{ margin: "0px 35px" }}>
+    <div className="record-table">
       <SearchBar
         btnTitle={btnTitle}
         fields={fields}

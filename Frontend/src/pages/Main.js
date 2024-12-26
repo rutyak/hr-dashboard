@@ -5,19 +5,19 @@ import Sidebar from "../components/sidebar/Sidebar";
 import Header from "../components/header/Header";
 
 const Main = () => {
-  // const [search, setSearch] = useState();
   const [title, setTitle] = useState("Candidates");
-  // const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(true);
 
-  // function handleToggleMenu() {
-  //   setOpenMenu(!openMenu);
-  // }
+  function handleToggleMenu() {
+    console.log("handle toggle menu clicked", openMenu);
+    setOpenMenu(!openMenu);
+  }
 
   return (
     <div className="main-container">
-      <Sidebar setTitle={setTitle}/>
+      <Sidebar setTitle={setTitle} openMenu={openMenu} setOpenMenu={setOpenMenu}/>
       <div className="main-body">
-        <Header title={title}/>
+        <Header title={title} handleToggleMenu={handleToggleMenu}/>
         <Outlet />
       </div>
     </div>

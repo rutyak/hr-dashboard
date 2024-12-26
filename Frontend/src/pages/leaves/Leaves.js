@@ -130,13 +130,13 @@ const Leaves = () => {
 
   return (
     <>
-      <div style={{ margin: "0px 35px" }}>
+      <div className="leaves-container">
         <SearchBar btnTitle={"Add New Leave"} fields={fields} onSubmit={handleSubmit}/>
         <div className="leaves">
-          <div style={{ width: "70%" }}>
+          <div className="leaves-table">
             <ReusableTable data={data} columns={columns} rowKey="name" />
           </div>
-          <div style={{ width: "28%" }}>
+          <div className="leaves-calender">
             <LeaveCalendar />
           </div>
         </div>

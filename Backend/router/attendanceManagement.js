@@ -8,7 +8,7 @@ const upload = require("../storage/multer");
 
 const router = express.Router();
 
-router.post("/create/attendance",upload.single("photo"), createController(attendance));
+router.post("/create/attendance", createController(attendance));
 
 router.get("/fetch/attendance", fetchController(attendance));
 

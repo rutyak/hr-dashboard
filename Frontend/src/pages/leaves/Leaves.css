@@ -1,4 +1,83 @@
-.leaves{
-    display: flex;
-    gap: 10px;
+.leaves {
+  display: flex;
+  gap: 10px;
+  margin: 0px 35px;
+}
+
+@media (max-width: 480px) {
+  .leaves {
+    flex-direction: column;
+    margin: 0px 10px;
+    gap: 0px;
+  }
+
+  .leaves-table,
+  .leaves-calender {
+    width: 100%;
+  }
+
+  .leaves-table,
+  .leaves-calender {
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .leaves {
+    flex-direction: column;
+    margin: 0px 10px;
+    gap: 0px;
+  }
+
+  .leaves-table,
+  .leaves-calender {
+    width: 100%;
+  }
+
+  .leaves-table,
+  .leaves-calender {
+    margin-bottom: 15px;
+  }
+
+  .search-bar-container {
+    padding: 18px 17px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .leaves {
+    flex-direction: column;
+    margin: 0px 10px;
+    gap: 0px;
+  }
+
+  .leaves-table,
+  .leaves-calender {
+    width: 100%;
+  }
+
+  .leaves-table,
+  .leaves-calender {
+    margin-bottom: 15px;
+  }
+
+  .leave-container {
+    margin: 0px 25px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .leaves {
+    flex-direction: row;
+    overflow-y: auto;
+    gap: 0px;
+  }
+
+  .leaves-table {
+    width: 70%;
+  }
+
+  .leaves-calender {
+    width: 28%;
+  }
 }

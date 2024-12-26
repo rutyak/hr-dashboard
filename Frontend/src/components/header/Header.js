@@ -1,14 +1,18 @@
 import React from "react";
 import "./Header.css";
 import { BellIcon, EmailIcon } from "../../assets/Icons";
+import menuIcon from "../../assets/menu.png";
 
-const Header = ({title}) => {
+const Header = ({ title, handleToggleMenu }) => {
   return (
-    <div className="header" style={{ margin: "0px 35px" }}>
-      <div className="title">{title}</div>
+    <div className="header">
+      <div className="menu-icon">
+        <img src={menuIcon} alt="icon" className="icon" style={{ width: "27px" }} onClick={handleToggleMenu}/>
+        <div className="title">{title}</div>
+      </div>
       <div className="icons">
-        <EmailIcon/>
-        <BellIcon/>
+        <EmailIcon />
+        <BellIcon />
         <div className="profile">
           <img
             src="https://via.placeholder.com/40"

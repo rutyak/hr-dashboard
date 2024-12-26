@@ -12,14 +12,16 @@ const createController = (model) => {
       declaration,
       joiningDate,
       position,
+      designation,
+      status,
+      task,
     } = req.body;
 
-    console.log(department, email, joiningDate, name, phone, position);
+    console.log(name, designation, department, task, status);
     console.log(model.modelName);
 
-    // Function to format date to dd/mm/yyyy
     const formatDate = (date) => {
-      if (!date) return null; // Handle undefined or null dates
+      if (!date) return null; 
       const d = new Date(date);
       const day = String(d.getDate()).padStart(2, "0");
       const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -32,10 +34,10 @@ const createController = (model) => {
       switch (model.modelName) {
         case "Candidate":
           console.log("Candidate clicked !!");
-          const result = await cloudinary.uploader.upload(req.file.path, {
-            resource_type: "auto",
-            folder: "files",
-          });
+          // const result = await cloudinary.uploader.upload(req.file.path, {
+          //   resource_type: "auto",
+          //   folder: "files",
+          // });
 
           newData = await model.create({
             name,
@@ -43,7 +45,7 @@ const createController = (model) => {
             phone,
             department,
             experience,
-            resume: result.url,
+            resume,
             declaration,
           });
           break;
@@ -52,14 +54,20 @@ const createController = (model) => {
           newData = await model.create({
             department,
             email,
-            joiningDate: formatDate(joiningDate), // Format the joiningDate field
+            joiningDate: formatDate(joiningDate), 
             name,
             phone,
             position,
           });
           break;
         case "Attendance":
-          newData = await model.create({});
+          newData = await model.create({
+            name,
+            designation,
+            department,
+            task,
+            status,
+          });
           break;
         case "Leave":
           newData = await model.create({});

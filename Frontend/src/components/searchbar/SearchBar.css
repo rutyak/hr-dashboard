@@ -53,7 +53,6 @@
   font-size: 16px;
 }
 
-/* Add button styling */
 .add-button {
   padding: 10px 20px;
   background: linear-gradient(90deg, #6a11cb, #2575fc);
@@ -70,20 +69,54 @@
   background: linear-gradient(90deg, #2575fc, #6a11cb);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .search-bar-container {
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dropdown select {
+    padding: 4px 25px;
+    font-size: 9px;
   }
 
   .search-input {
-    max-width: 100%;
+    max-width: 130px;
   }
 
   .add-button {
-    width: 100%;
-    text-align: center;
+    font-size: 8px;
+    padding: 7px 21px;
   }
+
+  .search-input input {
+    padding: 0px 4px;
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .dropdown select {
+    padding: 7px 25px;
+    font-size: 9px;
+  }
+
+  .search-input input {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+  .search-input {
+    max-width: 130px;
+  }
+
+  .add-button {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 1025px) {
+}
+
+@media (min-width: 1280px) {
 }
