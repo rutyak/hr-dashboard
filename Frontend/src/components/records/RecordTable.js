@@ -29,7 +29,7 @@ const RecordTable = ({
 
   const handleSubmit = async (formData) => {
     try {
-      const response = await axios.post(createUrl, formData);
+      await axios.post(createUrl, formData);
       toast.success(`${btnTitle} submitted successfully!`);
       fetchData();
     } catch (error) {
@@ -40,7 +40,7 @@ const RecordTable = ({
 
   const handleEdit = async (updatedData, itemId) => {
     try {
-      const response = await axios.patch(`${updateUrl}/${itemId}`, updatedData);
+      await axios.patch(`${updateUrl}/${itemId}`, updatedData);
       toast.success(`${btnTitle} updated successfully!`);
       fetchData();
     } catch (error) {
@@ -52,7 +52,7 @@ const RecordTable = ({
   const handleDelete = async (itemId) => {
     if (window.confirm(`Are you sure you want to delete this ${btnTitle.toLowerCase()}?`)) {
       try {
-        const response = await axios.delete(`${deleteUrl}/${itemId}`);
+        await axios.delete(`${deleteUrl}/${itemId}`);
         toast.success(`${btnTitle} deleted successfully!`);
         fetchData();
       } catch (error) {

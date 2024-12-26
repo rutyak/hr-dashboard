@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const Base_url = process.env.REACT_APP_BACKEND_URL;
 
