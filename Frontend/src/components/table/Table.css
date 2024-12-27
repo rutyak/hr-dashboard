@@ -5,18 +5,11 @@
   height: 570px;
 }
 
-.table-image {
+.table-image, .profile-pic {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-img{
-  width: 40px;
-  height: 35px;
-  object-fit: cover;
-  border-radius: 50%;
 }
 
 
