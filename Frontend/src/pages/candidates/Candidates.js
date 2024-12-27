@@ -26,7 +26,6 @@ const Candidates = () => {
   ];
 
   const columns = [
-    { header: "Sr No.", accessor: (_, index) => String(index + 1).padStart(2, "0") },
     { header: "Candidate's Name", accessor: "name" },
     { header: "Email Address", accessor: "email" },
     { header: "Phone Number", accessor: "phone" },
