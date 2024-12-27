@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const AttendanceSchema = new mongoose.Schema({
     profile: {
         type: String,
-        default: "https://via.placeholder.com/40"
+        default: "https://res.cloudinary.com/drxanllxs/image/upload/v1731160820/samples/smile.jpg"
     },
     name: {
         type: String,

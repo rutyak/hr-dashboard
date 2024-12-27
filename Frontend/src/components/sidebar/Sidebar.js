@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./Sidebar.css";
 import {
   AttendanceIcon,
@@ -13,15 +13,33 @@ import { Link } from "react-router-dom";
 import Logout from "../../pages/authentication/logout/Logout";
 
 const Sidebar = ({ setTitle, openMenu, setOpenMenu }) => {
-  const [activeMenu, setActiveMenu] = useState(""); // State to track the active menu item
-
-  function handleCloseMenu(type) {
-    setActiveMenu(type); // Set the active menu item
+  const handleCloseMenu = (type) => {
+    setTitle(type);
     if (window.innerWidth <= 1024) {
       setOpenMenu(false);
     }
-    setTitle(type);
-  }
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setOpenMenu(true);
+      } else {
+        setOpenMenu(false);
+      }
+    };
+
+    // Set menu state on initial render
+    handleResize();
+
+    // Add event listener for screen resizing
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setOpenMenu]);
 
   return (
     <div className={openMenu ? "sidebar" : "closeMenu"}>
@@ -38,7 +56,7 @@ const Sidebar = ({ setTitle, openMenu, setOpenMenu }) => {
         <p className="section-title">Recruitment</p>
         <Link
           to="/dashboard"
-          className={`menu-item ${activeMenu === "Candidates" ? "active" : ""}`}
+          className="menu-item"
           onClick={() => handleCloseMenu("Candidates")}
         >
           <CandidateIcon />
@@ -47,7 +65,7 @@ const Sidebar = ({ setTitle, openMenu, setOpenMenu }) => {
         <p className="section-title">Organization</p>
         <Link
           to="/dashboard/employees"
-          className={`menu-item ${activeMenu === "Employees" ? "active" : ""}`}
+          className="menu-item"
           onClick={() => handleCloseMenu("Employees")}
         >
           <EmployeeIcon />
@@ -55,7 +73,7 @@ const Sidebar = ({ setTitle, openMenu, setOpenMenu }) => {
         </Link>
         <Link
           to="/dashboard/attendance"
-          className={`menu-item ${activeMenu === "Attendance" ? "active" : ""}`}
+          className="menu-item"
           onClick={() => handleCloseMenu("Attendance")}
         >
           <AttendanceIcon />
@@ -63,17 +81,14 @@ const Sidebar = ({ setTitle, openMenu, setOpenMenu }) => {
         </Link>
         <Link
           to="/dashboard/leaves"
-          className={`menu-item ${activeMenu === "Leaves" ? "active" : ""}`}
+          className="menu-item"
           onClick={() => handleCloseMenu("Leaves")}
         >
           <LeavesIcon />
           <span className="text">Leaves</span>
         </Link>
         <p className="section-title">Others</p>
-        <div
-          className={`menu-item ${activeMenu === "Logout" ? "active" : ""}`}
-          onClick={() => handleCloseMenu("Logout")}
-        >
+        <div className="menu-item" onClick={() => handleCloseMenu("Logout")}>
           <LogoutIcon />
           <Logout />
         </div>

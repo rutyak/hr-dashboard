@@ -15,7 +15,7 @@ const Header = ({ title, handleToggleMenu }) => {
         <BellIcon />
         <div className="profile">
           <img
-            src="https://via.placeholder.com/40"
+            src="https://res.cloudinary.com/drxanllxs/image/upload/v1731160820/samples/smile.jpg"
             alt="User"
             className="profile-image"
           />

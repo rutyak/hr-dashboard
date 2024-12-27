@@ -70,7 +70,12 @@
   .leaves {
     flex-direction: row;
     overflow-y: auto;
-    gap: 0px;
+    gap: 35px;
+    margin: 0px;
+  }
+
+  .leaves-container {
+    margin: 0px 35px;
   }
 
   .leaves-table {

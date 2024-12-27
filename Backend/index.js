@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const candidateRouter = require("./router/candidateManagement");
 const employeeRouter = require("./router/employeeManagement");
 const attendanceRouter = require("./router/attendanceManagement");
+const leavesRouter = require("./router/leavesManagement");
 const userAuthRouter = require("./router/authentication");
 
 require("dotenv").config();
@@ -38,6 +39,7 @@ app.options('*', cors());
 app.use(candidateRouter);
 app.use(employeeRouter);
 app.use(attendanceRouter);
+app.use(leavesRouter);
 app.use(userAuthRouter);
 
 app.listen(port, () => {

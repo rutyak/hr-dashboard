@@ -1,5 +1,7 @@
 import React from "react";
 import RecordTable from "../../components/records/RecordTable";
+import { DownloadIcon } from "../../assets/Icons";
+const Base_url = process.env.REACT_APP_BACKEND_URL;
 
 const Candidates = () => {
   const fields = [
@@ -45,17 +47,17 @@ const Candidates = () => {
     { 
       header: "Resume", 
       accessor: "resume", 
-      render: (value) => value ? <a href={value} target="_blank" rel="noopener noreferrer">View Resume</a> : "No Resume Uploaded"
+      render: (value) => value ? <a href={value} target="_blank" rel="noopener noreferrer"><DownloadIcon/></a> : "No Resume Uploaded"
     },
     { header: "", accessor: "" }
   ];
 
   return (
     <RecordTable
-      fetchUrl={`${process.env.REACT_APP_BACKEND_URL}/fetch/candidate`}
-      createUrl={`${process.env.REACT_APP_BACKEND_URL}/create/candidate`}
-      updateUrl={`${process.env.REACT_APP_BACKEND_URL}/update/candidate`}
-      deleteUrl={`${process.env.REACT_APP_BACKEND_URL}/delete/candidate`}
+      fetchUrl={`${Base_url}/fetch/candidate`}
+      createUrl={`${Base_url}/create/candidate`}
+      updateUrl={`${Base_url}/update/candidate`}
+      deleteUrl={`${Base_url}/delete/candidate`}
       fields={fields}
       columns={columns}
       btnTitle="Add New Candidate"

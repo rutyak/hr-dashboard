@@ -10,6 +10,22 @@
 }
 
 .add-button {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-button:hover {
+  background: linear-gradient(90deg, #2575fc, #6a11cb);
+}
+
+.add-button {
   padding: 7px 20px;
   background: linear-gradient(to right, #6a11cb, #2575fc);
   color: white;
@@ -128,6 +144,11 @@
     padding-right: 0px;
   }
 
+  .add-button {
+    font-size: 8px;
+    padding: 7px 21px;
+  }
+
   .status-dropdown {
     font-size: smaller;
   }
@@ -164,6 +185,10 @@
 
   .status-dropdown {
     font-size: smaller;
+  }
+
+  .add-button {
+    font-size: 11px;
   }
 }
 

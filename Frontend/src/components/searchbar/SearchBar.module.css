@@ -1,4 +1,4 @@
-.search-bar-container {
+.searchBarContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,8 +9,8 @@
   padding: 18px 0px;
 }
 
-.dropdown-container,
-.input-btn {
+.dropdownContainer,
+.inputBtn {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -27,7 +27,7 @@
   background-color: white;
 }
 
-.search-input {
+.searchInput {
   display: flex;
   align-items: center;
   border: 2px solid #a770ef;
@@ -37,14 +37,14 @@
   padding-left: 16px;
 }
 
-.search-input input {
+.searchInput input {
   padding: 7px 10px;
   border: none;
   outline: none;
   font-size: 14px;
 }
 
-.search-input button {
+.searchInput button {
   background-color: transparent;
   border: none;
   padding: 10px;
@@ -53,24 +53,9 @@
   font-size: 16px;
 }
 
-.add-button {
-  padding: 10px 20px;
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.add-button:hover {
-  background: linear-gradient(90deg, #2575fc, #6a11cb);
-}
 
 @media (max-width: 480px) {
-  .search-bar-container {
+  .searchBarContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,16 +66,11 @@
     font-size: 9px;
   }
 
-  .search-input {
+  .searchInput {
     max-width: 130px;
   }
 
-  .add-button {
-    font-size: 8px;
-    padding: 7px 21px;
-  }
-
-  .search-input input {
+  .searchInput input {
     padding: 0px 4px;
     font-size: 9px;
   }
@@ -102,17 +82,14 @@
     font-size: 9px;
   }
 
-  .search-input input {
+  .searchInput input {
     padding: 7px 10px;
     font-size: 11px;
   }
-  .search-input {
+  .searchInput {
     max-width: 130px;
   }
 
-  .add-button {
-    font-size: 11px;
-  }
 }
 
 @media (min-width: 1025px) {

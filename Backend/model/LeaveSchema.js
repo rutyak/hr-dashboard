@@ -4,7 +4,7 @@ const LeaveSchema = new mongoose.Schema({
     profile: {
         type: String,
         required: true,
-        default: "https://via.placeholder.com/40",
+        default: "https://res.cloudinary.com/drxanllxs/image/upload/v1731160820/samples/smile.jpg",
     },
     name: {
         type: String,
@@ -24,8 +24,6 @@ const LeaveSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Pending", "Approved", "Rejected"],
-        required: true,
         default: "Pending"
     },
     docs: {

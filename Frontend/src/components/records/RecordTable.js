@@ -3,17 +3,17 @@ import axios from "axios";
 import ReusableTable from "../../components/table/Table";
 import SearchBar from "../../components/searchbar/SearchBar";
 import { toast } from "react-toastify";
-import "./RecordTable.css";
+import styles from "./RecordTable.module.css";
 
-const RecordTable = ({ 
-  fetchUrl, 
-  createUrl, 
-  updateUrl, 
-  deleteUrl, 
-  fields, 
-  columns, 
-  btnTitle, 
-  rowKey 
+const RecordTable = ({
+  fetchUrl,
+  createUrl,
+  updateUrl,
+  deleteUrl,
+  fields,
+  columns,
+  btnTitle,
+  rowKey,
 }) => {
   const [data, setData] = useState([]);
 
@@ -27,7 +27,17 @@ const RecordTable = ({
     }
   };
 
-  const handleSubmit = async (formData) => {
+  const handleSubmit = async (data) => {    
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("phone", data.phone);
+    formData.append("department", data.department);
+    formData.append("experience", data.experience);
+    formData.append("declaration", data.declaration);
+    formData.append("resume", data.resume);
+
     try {
       await axios.post(createUrl, formData);
       toast.success(`${btnTitle} submitted successfully!`);
@@ -50,7 +60,11 @@ const RecordTable = ({
   };
 
   const handleDelete = async (itemId) => {
-    if (window.confirm(`Are you sure you want to delete this ${btnTitle.toLowerCase()}?`)) {
+    if (
+      window.confirm(
+        `Are you sure you want to delete this ${btnTitle.toLowerCase()}?`
+      )
+    ) {
       try {
         await axios.delete(`${deleteUrl}/${itemId}`);
         toast.success(`${btnTitle} deleted successfully!`);
@@ -67,12 +81,14 @@ const RecordTable = ({
   }, []);
 
   return (
-    <div className="record-table">
-      <SearchBar
-        btnTitle={btnTitle}
-        fields={fields}
-        onSubmit={handleSubmit}
-      />
+    <div className={styles.recordTable}>
+      {!btnTitle.includes("Leave") && (
+        <SearchBar
+          btnTitle={btnTitle}
+          fields={fields}
+          onSubmit={handleSubmit}
+        />
+      )}
       <ReusableTable
         data={data}
         columns={columns}

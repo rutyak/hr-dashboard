@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const EmployeeSchema = new mongoose.Schema({
+    profile: {
+        type: String,
+        required: true,
+        default: "https://res.cloudinary.com/drxanllxs/image/upload/v1731160820/samples/smile.jpg",
+    },
     name: {
         type: String,
         required: true,

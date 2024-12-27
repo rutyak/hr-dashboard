@@ -9,7 +9,6 @@ const Main = () => {
   const [openMenu, setOpenMenu] = useState(true);
 
   function handleToggleMenu() {
-    console.log("handle toggle menu clicked", openMenu);
     setOpenMenu(!openMenu);
   }
 

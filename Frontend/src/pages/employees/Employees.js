@@ -1,5 +1,6 @@
 import React from "react";
 import RecordTable from "../../components/records/RecordTable";
+const Base_url = process.env.REACT_APP_BACKEND_URL;
 
 const Employees = () => {
   const fields = [
@@ -36,10 +37,10 @@ const Employees = () => {
 
   return (
     <RecordTable
-      fetchUrl={`${process.env.REACT_APP_BACKEND_URL}/fetch/employee`}
-      createUrl={`${process.env.REACT_APP_BACKEND_URL}/create/employee`}
-      updateUrl={`${process.env.REACT_APP_BACKEND_URL}/update/employee`}
-      deleteUrl={`${process.env.REACT_APP_BACKEND_URL}/delete/employee`}
+      fetchUrl={`${Base_url}/fetch/employee`}
+      createUrl={`${Base_url}/create/employee`}
+      updateUrl={`${Base_url}/update/employee`}
+      deleteUrl={`${Base_url}/delete/employee`}
       fields={fields}
       columns={columns}
       btnTitle="Add New Employee"

@@ -7,8 +7,6 @@ import axios from "axios";
 
 const Base_url = process.env.REACT_APP_BACKEND_URL;
 
-console.log("Base_url: ",Base_url);
-
 const Register = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -49,7 +47,6 @@ const Register = () => {
 
       if (response && response.data) {
         toast.success("Registration successful!");
-        console.log("Registration successful:", response.data);
 
         setTimeout(() => navigate("/"), 2000);
       } else {

@@ -1,8 +1,9 @@
 import React from "react";
 import RecordTable from "../../components/records/RecordTable";
+const Base_url = process.env.REACT_APP_BACKEND_URL;
+
 
 const Attendance = () => {
-
   const fields = [
     {
       name: "name",
@@ -60,31 +61,26 @@ const Attendance = () => {
     { header: "Department", accessor: "department" },
     { header: "Task", accessor: "task" },
     {
-      header: "Status",
-      accessor: "status",
-      render: (value, rowIndex, columnIndex, updateRowData) => (
-        <select
-          value={value}
-          onChange={(e) =>
-            updateRowData(rowIndex, { ...value, status: e.target.value })
-          }
-        >
-          <option value="Work from home">Work from home</option>
-          <option value="Present">Present</option>
-          <option value="Medical Leave">Medical Leave</option>
-          <option value="Absent">Absent</option>
+      header: "Status", 
+      accessor: "status", 
+      render: (value) => (
+        <select className="status-dropdown" defaultValue={value}>
+          <option value="Status">Work From Home</option>
+          <option value="Scheduled">Present</option>
+          <option value="Selected">Absent</option>
+          <option value="Rejected">Leave</option>
         </select>
-      ),
+      )
     },
     { header: "", accessor: "" },
   ];
 
   return (
     <RecordTable
-      fetchUrl={`${process.env.REACT_APP_BACKEND_URL}/fetch/attendance`}
-      createUrl={`${process.env.REACT_APP_BACKEND_URL}/create/attendance`}
-      updateUrl={`${process.env.REACT_APP_BACKEND_URL}/update/attendance`}
-      deleteUrl={`${process.env.REACT_APP_BACKEND_URL}/delete/attendance`}
+      fetchUrl={`${Base_url}/fetch/attendance`}
+      createUrl={`${Base_url}/create/attendance`}
+      updateUrl={`${Base_url}/update/attendance`}
+      deleteUrl={`${Base_url}/delete/attendance`}
       fields={fields}
       columns={columns}
       btnTitle="Add Details"

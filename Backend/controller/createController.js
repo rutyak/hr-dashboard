@@ -8,20 +8,21 @@ const createController = (model) => {
       phone,
       department,
       experience,
-      resume,
       declaration,
       joiningDate,
       position,
       designation,
       status,
+      date,
       task,
+      reason,
     } = req.body;
 
-    console.log(name, designation, department, task, status);
-    console.log(model.modelName);
+    console.log("Incoming data:", req.body);
+    console.log("Model name:", model.modelName);
 
     const formatDate = (date) => {
-      if (!date) return null; 
+      if (!date) return null;
       const d = new Date(date);
       const day = String(d.getDate()).padStart(2, "0");
       const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -29,15 +30,31 @@ const createController = (model) => {
       return `${day}/${month}/${year}`;
     };
 
+    const uploadFile = async (filePath, folder) => {
+      try {
+        if (!filePath) throw new Error("File not provided");
+        const result = await cloudinary.uploader.upload(filePath, {
+          resource_type: "auto",
+          folder,
+        });
+        return result.url;
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        throw new Error("Failed to upload file");
+      }
+    };
+
     try {
       let newData;
+
       switch (model.modelName) {
         case "Candidate":
-          console.log("Candidate clicked !!");
-          // const result = await cloudinary.uploader.upload(req.file.path, {
-          //   resource_type: "auto",
-          //   folder: "files",
-          // });
+          console.log("Creating Candidate...");
+          if (!req.file) {
+            return res.status(400).json({ success: false, message: "Resume file is required" });
+          }
+
+          const resumeUrl = await uploadFile(req.file.path, "resumes");
 
           newData = await model.create({
             name,
@@ -45,22 +62,25 @@ const createController = (model) => {
             phone,
             department,
             experience,
-            resume,
+            resume: resumeUrl,
             declaration,
           });
           break;
+
         case "Employee":
-          console.log("Employee in backend working as expected::");
+          console.log("Creating Employee...");
           newData = await model.create({
             department,
             email,
-            joiningDate: formatDate(joiningDate), 
+            joiningDate: formatDate(joiningDate),
             name,
             phone,
             position,
           });
           break;
+
         case "Attendance":
+          console.log("Creating Attendance...");
           newData = await model.create({
             name,
             designation,
@@ -69,17 +89,34 @@ const createController = (model) => {
             status,
           });
           break;
+
         case "Leave":
-          newData = await model.create({});
+          console.log("Creating Leave...");
+          const docsUrl = req.file
+            ? await uploadFile(req.file.path, "leave-documents")
+            : null;
+
+          newData = await model.create({
+            name,
+            date: formatDate(date),
+            reason,
+            status,
+            docs: docsUrl,
+          });
           break;
+
         default:
-          return res.status(400).json({ message: "Invalid model type" });
+          console.error("Invalid model type");
+          return res.status(400).json({ success: false, message: "Invalid model type" });
       }
 
-      res.status(201).json(newData);
+      res.status(201).json({ success: true, data: newData });
     } catch (error) {
       console.error("Error creating data:", error);
-      res.status(500).json({ message: error.message });
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   };
 };

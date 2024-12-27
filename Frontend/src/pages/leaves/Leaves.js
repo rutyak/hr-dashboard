@@ -1,39 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReusableTable from "../../components/table/Table";
 import SearchBar from "../../components/searchbar/SearchBar";
 import LeaveCalendar from "./LeavesCalander";
 import "./Leaves.css";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { DocIcon } from "../../assets/Icons";
 
 const Leaves = () => {
-  const data = [
-    {
-      profile: "https://via.placeholder.com/40",
-      name: "Esther Howard",
-      designation: "Designer",
-      date: "10/09/24",
-      reason: "Going to Home town",
-      status: "Pending",
-      docs: "https://via.placeholder.com/20",
-    },
-    {
-      profile: "https://via.placeholder.com/40",
-      name: "Wade Warren",
-      designation: "Senior Software Engineer",
-      date: "10/09/24",
-      reason: "Had fever Dr. told to rest for 3 days",
-      status: "Approved",
-      docs: "https://via.placeholder.com/20",
-    },
-    {
-      profile: "https://via.placeholder.com/40",
-      name: "Jenny Wilson",
-      designation: "Developer",
-      date: "11/09/24",
-      reason: "Not feeling Well",
-      status: "Rejected",
-      docs: "https://via.placeholder.com/20",
-    },
-  ];
+  const [data, setData] = useState([]);
 
   const columns = [
     {
@@ -54,7 +29,7 @@ const Leaves = () => {
         </div>
       ),
     },
-    { header: "Date", accessor: "date" },
+    { header: "Date", accessor: "date" }, 
     { header: "Reason", accessor: "reason" },
     {
       header: "Status",
@@ -79,7 +54,7 @@ const Leaves = () => {
       accessor: "docs",
       render: (value) => (
         <a href={value} target="_blank" rel="noopener noreferrer">
-          <img src={value} alt="Document Icon" />
+          <DocIcon/>
         </a>
       ),
     },
@@ -87,7 +62,7 @@ const Leaves = () => {
 
   const fields = [
     {
-      name: "fullName",
+      name: "name",
       type: "text",
       placeholder: "Full Name",
       required: true,
@@ -105,7 +80,7 @@ const Leaves = () => {
       ],
     },
     {
-      name: "leaveDate",
+      name: "date", 
       type: "date",
       placeholder: "Leave Date",
       required: true,
@@ -117,21 +92,51 @@ const Leaves = () => {
       required: true,
     },
     {
-      name: "attachment",
+      name: "docs",
       type: "file",
       placeholder: "Attach Supporting Documents",
       required: false,
     },
   ];
-  
-  function handleSubmit(){
-    console.log("Leaves applied....")
-  }
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/fetch/leaves`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Error fetching data. Please try again.");
+    }
+  };
+
+  const handleSubmit = async (formData) => {
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/create/leaves`,
+        formData
+      );
+      toast.success("Leave submitted successfully!");
+      fetchData();
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      toast.error("Error submitting data. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
       <div className="leaves-container">
-        <SearchBar btnTitle={"Add New Leave"} fields={fields} onSubmit={handleSubmit}/>
+        <SearchBar
+          btnTitle={"Add New Leave"}
+          fields={fields}
+          onSubmit={handleSubmit}
+        />
         <div className="leaves">
           <div className="leaves-table">
             <ReusableTable data={data} columns={columns} rowKey="name" />
